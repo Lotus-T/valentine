@@ -5,6 +5,402 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="css/flower.css" />
+    <style>
+      .flower {
+        position: relative;
+      }
+
+      /* Cat Container */
+      .cat {
+        position: absolute;
+        bottom: -20px;
+        right: -80px;
+        width: 180px;
+        height: 160px;
+        z-index: 5;
+      }
+
+      /* Cat Body */
+      .cat__body {
+        position: absolute;
+        bottom: 45px;
+        right: 30px;
+        width: 120px;
+        height: 75px;
+        background: linear-gradient(135deg, #ff9955 0%, #ffaa66 50%, #ff8844 100%);
+        border-radius: 60% 40% 40% 60% / 50% 50% 50% 50%;
+        box-shadow: inset -5px -5px 15px rgba(0,0,0,0.1), 2px 4px 12px rgba(0,0,0,0.2);
+        z-index: 3;
+      }
+
+      /* Orange tabby stripes on body */
+      .cat__body::before {
+        content: '';
+        position: absolute;
+        top: 15px;
+        left: 20px;
+        width: 80px;
+        height: 50px;
+        background: repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 8px,
+          rgba(204, 85, 34, 0.3) 8px,
+          rgba(204, 85, 34, 0.3) 11px
+        );
+        border-radius: 50%;
+      }
+
+      /* Cat Head */
+      .cat__head {
+        position: absolute;
+        bottom: 95px;
+        right: 115px;
+        width: 70px;
+        height: 65px;
+        background: linear-gradient(145deg, #ffaa66 0%, #ff9955 60%, #ff8844 100%);
+        border-radius: 50% 50% 45% 45%;
+        box-shadow: inset -3px -3px 10px rgba(0,0,0,0.1), 1px 2px 8px rgba(0,0,0,0.15);
+        z-index: 4;
+      }
+
+      /* Head stripes */
+      .cat__head::after {
+        content: '';
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 50px;
+        height: 40px;
+        background: repeating-linear-gradient(
+          105deg,
+          transparent,
+          transparent 6px,
+          rgba(204, 85, 34, 0.25) 6px,
+          rgba(204, 85, 34, 0.25) 8px
+        );
+        border-radius: 50%;
+      }
+
+      /* Ears */
+      .cat__ear {
+        position: absolute;
+        top: -5px;
+        width: 22px;
+        height: 28px;
+        background: linear-gradient(145deg, #ff9955, #ff8844);
+        box-shadow: 1px 1px 4px rgba(0,0,0,0.15);
+      }
+
+      .cat__ear--left {
+        left: 8px;
+        border-radius: 80% 20% 20% 20%;
+        transform: rotate(-15deg);
+      }
+
+      .cat__ear--right {
+        right: 8px;
+        border-radius: 20% 80% 20% 20%;
+        transform: rotate(15deg);
+      }
+
+      .cat__ear::before {
+        content: '';
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        width: 14px;
+        height: 18px;
+        background: linear-gradient(145deg, #ffd4b3, #ffccaa);
+        border-radius: 50%;
+      }
+
+      /* Eyes */
+      .cat__eye {
+        position: absolute;
+        top: 25px;
+        width: 8px;
+        height: 10px;
+        background: linear-gradient(180deg, #2d5016 0%, #1a2e0d 100%);
+        border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+        animation: cat-blink 4s infinite;
+      }
+
+      .cat__eye--left {
+        left: 18px;
+      }
+
+      .cat__eye--right {
+        right: 18px;
+      }
+
+      @keyframes cat-blink {
+        0%, 48%, 52%, 100% {
+          height: 10px;
+          opacity: 1;
+        }
+        50% {
+          height: 1px;
+          opacity: 0.3;
+        }
+      }
+
+      /* Nose */
+      .cat__nose {
+        position: absolute;
+        top: 38px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 8px;
+        height: 6px;
+        background: linear-gradient(135deg, #ff9999 0%, #ff6666 100%);
+        border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+      }
+
+      /* Whiskers */
+      .cat__whisker {
+        position: absolute;
+        top: 40px;
+        width: 25px;
+        height: 1px;
+        background: linear-gradient(90deg, rgba(255,255,255,0.6), transparent);
+      }
+
+      .cat__whisker--1 {
+        left: -22px;
+        transform: rotate(-10deg);
+      }
+
+      .cat__whisker--2 {
+        left: -20px;
+        top: 45px;
+        transform: rotate(10deg);
+      }
+
+      .cat__whisker--3 {
+        right: -22px;
+        transform: rotate(10deg) scaleX(-1);
+      }
+
+      .cat__whisker--4 {
+        right: -20px;
+        top: 45px;
+        transform: rotate(-10deg) scaleX(-1);
+      }
+
+      /* BACK RIGHT LEG */
+      .cat__leg--back-right {
+        position: absolute;
+        bottom: 20px;
+        right: 32px;
+        width: 14px;
+        height: 48px;
+        background: linear-gradient(180deg, #ff9955 0%, #ff8844 50%, #ff9955 100%);
+        border-radius: 7px 7px 0 0;
+        box-shadow: inset -1px 0 3px rgba(0,0,0,0.15), 
+                    1px 2px 4px rgba(0,0,0,0.2);
+        z-index: 1;
+      }
+
+      /* Back right paw */
+      .cat__leg--back-right::after {
+        content: '';
+        position: absolute;
+        bottom: -9px;
+        left: -4px;
+        width: 22px;
+        height: 11px;
+        background: linear-gradient(135deg, #ff9955, #ff8844);
+        border-radius: 0 0 50% 50%;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+      }
+
+      /* BACK LEFT LEG */
+      .cat__leg--back-left {
+        position: absolute;
+        bottom: 20px;
+        right: 42px;
+        width: 15px;
+        height: 50px;
+        background: linear-gradient(180deg, #ffaa66 0%, #ff9955 50%, #ffaa66 100%);
+        border-radius: 8px 8px 0 0;
+        box-shadow: inset -1px 0 3px rgba(0,0,0,0.1), 
+                    1px 2px 4px rgba(0,0,0,0.2);
+        z-index: 2;
+      }
+
+      /* Back left paw */
+      .cat__leg--back-left::after {
+        content: '';
+        position: absolute;
+        bottom: -9px;
+        left: -4px;
+        width: 23px;
+        height: 11px;
+        background: linear-gradient(135deg, #ffaa66, #ff9955);
+        border-radius: 0 0 50% 50%;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+      }
+
+      /* FRONT RIGHT LEG */
+      .cat__leg--front-right {
+        position: absolute;
+        bottom: 20px;
+        right: 75px;
+        width: 13px;
+        height: 45px;
+        background: linear-gradient(180deg, #ff9955 0%, #ff8844 50%, #ff9955 100%);
+        border-radius: 7px 7px 0 0;
+        box-shadow: inset -1px 0 3px rgba(0,0,0,0.15), 
+                    1px 2px 4px rgba(0,0,0,0.2);
+        z-index: 2;
+      }
+
+      /* Front right paw */
+      .cat__leg--front-right::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: -3px;
+        width: 19px;
+        height: 10px;
+        background: linear-gradient(135deg, #ff9955, #ff8844);
+        border-radius: 0 0 45% 45%;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+      }
+
+      /* FRONT LEFT LEG - touching vase */
+      .cat__leg--front-left {
+        position: absolute;
+        bottom: 20px;
+        right: 105px;
+        width: 14px;
+        height: 48px;
+        background: linear-gradient(180deg, #ffaa66 0%, #ff9955 50%, #ffaa66 100%);
+        border-radius: 8px 8px 0 0;
+        box-shadow: inset -1px 0 3px rgba(0,0,0,0.1), 
+                    1px 2px 4px rgba(0,0,0,0.2);
+        z-index: 10;
+      }
+
+      /* Front left paw */
+      .cat__leg--front-left::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: -3px;
+        width: 20px;
+        height: 10px;
+        background: linear-gradient(135deg, #ffaa66, #ff9955);
+        border-radius: 0 0 45% 45%;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+      }
+
+      /* Paw tap animation */
+      .cat__leg--front-left {
+        animation: paw-tap 3s infinite ease-in-out;
+      }
+
+      @keyframes paw-tap {
+        0%, 100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-4px);
+        }
+      }
+
+      /* Tail */
+      .cat__tail {
+        position: absolute;
+        bottom: 60px;
+        right: 5px;
+        width: 70px;
+        height: 16px;
+        background: linear-gradient(90deg, #ff9955 0%, #ffaa66 50%, #ff9955 100%);
+        border-radius: 40% 60% 60% 40% / 50% 50% 50% 50%;
+        transform-origin: left center;
+        transform: rotate(-25deg);
+        box-shadow: inset 0 -2px 6px rgba(0,0,0,0.1), 1px 2px 5px rgba(0,0,0,0.15);
+        z-index: 0;
+        animation: tail-swish 4s infinite ease-in-out;
+      }
+
+      @keyframes tail-swish {
+        0%, 100% {
+          transform: rotate(-25deg);
+        }
+        50% {
+          transform: rotate(-35deg);
+        }
+      }
+
+      /* Tail stripes */
+      .cat__tail::before {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 5px;
+        width: 60px;
+        height: 12px;
+        background: repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 8px,
+          rgba(204, 85, 34, 0.3) 8px,
+          rgba(204, 85, 34, 0.3) 11px
+        );
+        border-radius: 50%;
+      }
+
+      /* Speech Bubble */
+      .cat__speech {
+        position: absolute;
+        bottom: 175px;
+        right: 140px;
+        background: #ffffff;
+        padding: 12px 20px;
+        border-radius: 20px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        z-index: 15;
+        animation: bubble-pop 6s infinite;
+      }
+
+      @keyframes bubble-pop {
+        0%, 100% {
+          opacity: 0;
+          transform: scale(0.8) translateY(5px);
+        }
+        10%, 90% {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+
+      .cat__speech-text {
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+        font-size: 18px;
+        color: #ff6b6b;
+        font-weight: bold;
+        margin: 0;
+        white-space: nowrap;
+      }
+
+      /* Speech bubble tail */
+      .cat__speech::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 30px;
+        width: 0;
+        height: 0;
+        border-left: 12px solid transparent;
+        border-right: 12px solid transparent;
+        border-top: 12px solid #ffffff;
+        filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1));
+      }
+    </style>
   </head>
   <body>
     <div id="thankyou"><b>Thank you for being my wife</b></div>
@@ -19,9 +415,7 @@
           <div class="flower__leaf flower__leaf--5"></div>
           <div class="flower__leaf flower__leaf--6"></div>
           <div class="flower__leaf flower__leaf--7"></div>
-          <div
-            class="flower__leaf flower__leaf--8 flower__fall-down--yellow"
-          ></div>
+          <div class="flower__leaf flower__leaf--8 flower__fall-down--yellow"></div>
         </div>
       </div>
 
@@ -35,9 +429,7 @@
           <div class="flower__leaf flower__leaf--5"></div>
           <div class="flower__leaf flower__leaf--6"></div>
           <div class="flower__leaf flower__leaf--7"></div>
-          <div
-            class="flower__leaf flower__leaf--8 flower__fall-down--pink"
-          ></div>
+          <div class="flower__leaf flower__leaf--8 flower__fall-down--pink"></div>
         </div>
       </div>
 
@@ -51,12 +443,34 @@
           <div class="flower__leaf flower__leaf--5"></div>
           <div class="flower__leaf flower__leaf--6"></div>
           <div class="flower__leaf flower__leaf--7"></div>
-          <div
-            class="flower__leaf flower__leaf--8 flower__fall-down--purple"
-          ></div>
+          <div class="flower__leaf flower__leaf--8 flower__fall-down--purple"></div>
         </div>
       </div>
+
       <div class="flower__glass"></div>
+
+      <div class="cat">
+        <div class="cat__speech">
+          <p class="cat__speech-text">Meow! 🐾</p>
+        </div>
+        <div class="cat__tail"></div>
+        <div class="cat__leg--back-right"></div>
+        <div class="cat__leg--back-left"></div>
+        <div class="cat__body"></div>
+        <div class="cat__leg--front-right"></div>
+        <div class="cat__head">
+          <div class="cat__ear cat__ear--left"></div>
+          <div class="cat__ear cat__ear--right"></div>
+          <div class="cat__eye cat__eye--left"></div>
+          <div class="cat__eye cat__eye--right"></div>
+          <div class="cat__nose"></div>
+          <div class="cat__whisker cat__whisker--1"></div>
+          <div class="cat__whisker cat__whisker--2"></div>
+          <div class="cat__whisker cat__whisker--3"></div>
+          <div class="cat__whisker cat__whisker--4"></div>
+        </div>
+        <div class="cat__leg--front-left"></div>
+      </div>
     </div>
   </body>
 </html>
